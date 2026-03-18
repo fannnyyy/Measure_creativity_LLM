@@ -1,7 +1,7 @@
 from huggingface_hub import snapshot_download, login
+import os
 
-
-login(token="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")
+login(token=os.environ.get("HF_TOKEN"))
 
 #snapshot_download(repo_id="ministere-culture/comparia-conversations", repo_type="dataset", local_dir="./data/comparia-conversations")
 
