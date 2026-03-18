@@ -8,3 +8,8 @@
 ## Raphaël VIGNAL
 
 ## Fanny BADOULES
+
+
+### Données :
+
+https://huggingface.co/collections/comparIA/jeux-de-donnees-compar-ia
