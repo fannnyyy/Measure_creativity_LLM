@@ -1,0 +1,96 @@
+question 0 : creativity index
+Hypothèse :
+Créativité = alpha Nouveauté + beta valeur + gamma Surprise
+
+Pondération + importante pour valeur (cf analyse famille q 0 ect)
+
+La littérature (Amabile, Kaufman, paradoxe du jugement) 
+établit que beta (valeur) est la composante la plus pondérée par des experts.
+
+
+Trois facteurs propres à Compar:IA suggèrent que cette pondération  
+ne tient pas dans ce contexte !
+
+- La littérature sur le paradoxe du jugement (Kaufman, Amabile) 
+dit que les non-experts sous-évaluent la valeur fonctionnelle 
+et surpondèrent la nouveauté perceptuelle. (Les non-experts sont
+meilleurs juges de la nouveauté que de la valeur car la nouveauté 
+est plus saillante visuellement, moins besoin d'expertise pour la détecter).
+
+- Le biais de longueur est un proxy de valeur perçue (une réponse 
+longue semble plus travaillée, plus utile) donc le biais gonfle beta spécifiquement.
+
+- La transitivité stochastique + Davidson montre que les jugements 
+sont peu discriminants globalement ce qui suggère que la composante 
+la plus stable dans les préférences est celle qui est la plus immédiatement 
+perceptible, soit la nouveauté / surprise. c'est la signature du jugement 
+non-expert qui ne s'appuie pas sur un critère stable comme la valeur experte.
+(++ C'est un critère de qualité de notre mesure. Si l'index CI vérifie la 
+transitivité forte alors le classement est cohérent et fiable)
+
+
+Rectification :
+Choix des métriques pour Nouveauté Valeur et Surprise + critère de validation 
+(transitivité stochastique)
+
+Composant du CI : Pb soulevé => Métrique choisi pour pallier cela 
+
+Valeur : Paradoxe jugement => BERTScore
+	similarité entre la réponse et le prompt, ça mesure si la réponse est 
+    pertinente et complète
+
+Nouveauté : Biais de positions + longueur  => MATTR
+	Diversité lexicale normalisée sur fenêtres fixes, indépendante de la 
+    longueur + randomisation A/B 
+
+Surprise : Subjectivité du jugement non-expert => Divergent Thinking Score
+	Mesure la distance sémantique entre concepts associés, indépendamment 
+    de la fluidité
+
+Méthodologiie :
+Métriques choisies   
+	N : MATTR   
+	V : BERTScore   
+	S : Divergent Thinking Score
+
+2. Calcul de l'index de créativité   
+	CI = alpha·MATTR + gamma·DTS + beta·BERTScore   
+	Avec alpha > gamma > beta
+
+3. Validation de l'index  
+ 	Bradley-Terry sur les scores CI   
+	+ vérification transitivité stochastique (si A > B et B > C alors A > C)
+	=> 0 violations = index cohérent (car scores continus c'est toujours vérifié mathématiquement)
+	=> violations = index à revoir (vote humain peut dire A > B > C mais C > A)
+
+4. Comparaison avec le classement Bradley-Terry calculé directement depuis les votes Compar:IA   
+	Est-ce que ton index CI classe les modèles différemment du classement Bradley-Terry calculé directement depuis les votes Compar:IA ?  
+ 	=> si oui, cela montre que les biais déformaient le classement
+
+
+
+Réponse à la question "Quelle place le contenue et l’offre culturelle français ont dans les réponses des IA conversationnelle ?" :
+
+- Demande du ministère : IA plus creativement fr 
+    (souveraineté, choix du corpus de données + respectueux et culturellment fr 
+    (droit d’auteur respecté, richesse linguistique et l’héritage culturel))
+
+- Pb : ici mesure de la créativité sur modèle internationaux (dont fr) 
+    mais entrainer sur les même données (même si certains modèles ont 
+    des données plus multi-linguiste)
+
+- La mesure de créativité ne reflète pas la diversité culturelle des 
+    données mais plutôt leur qualité d’entrainement
+
+- Ici mesure de créativité global pas spécifiquement lié a la culture fr 
+
+- MAIS notre mesure de créativité débiaisé (nouvelle présentation des réponses, 
+    évite biais de position, + mélange réponse, évite biais de longueur ou autre 
+    papier état de l’art) ET équilibré pour test grand publique est prête à être réutilisé
+
+- Mise en contexte possible : création d’un corpus de données par le ministère 
+    « respectueux » + entrainement d’un modèle dessus = mesure de la créativité 
+    (avec notre index + grand public sur set préfiltré par CI + vérification par 
+    expert avec question non biaisé "Aviez-vous anticipé cette réponse ?")
+    vis à vis d’un modèle type « étranger » pour vraiment mesure l’impact et 
+    la place du contenue culturel fr
