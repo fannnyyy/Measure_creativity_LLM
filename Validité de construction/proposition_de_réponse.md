@@ -16,11 +16,11 @@ La littérature (Amabile, Kaufman, paradoxe du jugement) établit que β (valeur
 
 ## Métriques choisies pour pallier ces problèmes
 
-| Composante | Problème                            | Métrique                 | Pourquoi                                                                                                                                                          |
-| ---------- | ------------------------------------ | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Valeur     | Paradoxe du jugement                 | BERTScore                 | Mesure la similarité sémantique entre la réponse et le prompt — évalue si la réponse est pertinente et complète sans dépendre d'un jugement humain expert |
-| Nouveauté | Biais de longueur + position         | MATTR + randomisation A/B | Diversité lexicale normalisée sur fenêtres fixes, indépendante de la longueur. La randomisation A/B corrige le biais de position                              |
-| Surprise   | Subjectivité du jugement non-expert | Divergent Thinking Score  | Mesure la distance sémantique entre concepts associés, indépendamment de la fluidité du texte                                                                 |
+| Composante | Problème                            | Métrique                 | Pourquoi                                                                                                                                                         |
+| ---------- | ------------------------------------ | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Valeur     | Paradoxe du jugement                 | BERTScore                 | Mesure la similarité sémantique entre la réponse et le prompt, évalue si la réponse est pertinente et complète sans dépendre d'un jugement humain expert |
+| Nouveauté | Biais de longueur + position         | MATTR + randomisation A/B | Diversité lexicale normalisée sur fenêtres fixes, indépendante de la longueur. La randomisation A/B corrige le biais de position                             |
+| Surprise   | Subjectivité du jugement non-expert | Divergent Thinking Score  | Mesure la distance sémantique entre concepts associés, indépendamment de la fluidité du texte                                                                |
 
 ## Calcul du CI
 
@@ -28,18 +28,24 @@ La littérature (Amabile, Kaufman, paradoxe du jugement) établit que β (valeur
 
 Avec **α > γ > λ**
 
+**λ** faible => BERTScore mesure pas la richesse culturelle (vérifie juste si le modèle répond correctement au prompt)
+
+**α** forte => Nouveauté c’est le plus dur a avoir (richesse lexical, cf. référence littéraire)
+
+**γ** milieu => Mesure l’originalité des réponse
+
 ## Validation de l'index
 
-**Étape 1** 
+**Étape 1**
 
  Appliquer Bradley-Terry sur les scores CI et vérifier la transitivité stochastique : si A > B et B > C alors A > C.
 
 - 0 violations → index cohérent. Avec des scores continus c'est toujours garanti mathématiquement — contrairement au vote humain qui peut dire A > B > C mais C > A.
 - Violations → pondération à revoir.
 
-**Étape 2** 
+**Étape 2**
 
-Comparer le classement CI au classement Bradley-Terry calculé directement depuis les votes Compar:IA. 
+Comparer le classement CI au classement Bradley-Terry calculé directement depuis les votes Compar:IA.
 
 Si les deux classements diffèrent, cela montre que les biais déformaient effectivement le classement brut.
 
