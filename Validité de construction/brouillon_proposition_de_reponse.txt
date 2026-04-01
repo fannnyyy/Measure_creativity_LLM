@@ -71,6 +71,20 @@ Métriques choisies
 
 Réponse à la question "Quelle place le contenue et l’offre culturelle français ont dans les réponses des IA conversationnelle ?" :
 
+But du ministère de la culture :
+    IA culturelles et responsables
+Tâche demandée :
+    Mesure de la créativité pour évaluer place du contenu culturel français
+Problème observé :
+    Biais culturel faible (cf. modèles entraînés sans distinction de données culturelles) 
+    La mesure de créativité globale la diversité culturelle
+Mise en contexte possible :
+    Entraîner un modèle sur un dataset culturellement français 
+    Évaluer la créativité (due aux données) via notre CI sur une interface débiaisée 
+    Pondération calibrée avec des experts
+
+Détails de la réponse :
+
 - Demande du ministère : IA plus creativement fr 
     (souveraineté, choix du corpus de données + respectueux et culturellment fr 
     (droit d’auteur respecté, richesse linguistique et l’héritage culturel))
