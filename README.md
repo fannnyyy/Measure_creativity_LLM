@@ -68,6 +68,8 @@ Les modèles évalués, français ou internationaux, sont tous entraînés sur l
 
 ## Dépendances
 
+Les principales dépendances Python utilisées pour l'analyse sont :
+
 ```bash
 pip install pandas numpy scipy scikit-learn
 ```
